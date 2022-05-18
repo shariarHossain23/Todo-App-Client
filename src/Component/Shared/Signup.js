@@ -1,39 +1,46 @@
-import React from "react";
-import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
+import React, { useState } from "react";
+import {
+    useCreateUserWithEmailAndPassword,
+    useSignInWithGoogle,
+    useUpdateProfile
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
 
 const Signup = () => {
+  const [firebaseError, setFirebaseError] = useState("");
   const {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
   } = useForm();
-//   google sign
+  //   google sign
   const [signInWithGoogle, Guser, Gloading, Gerror] = useSignInWithGoogle(auth);
-//   crete user
-  const [
-    createUserWithEmailAndPassword,
-    user,
-    loading,
-    error,
-  ] = useCreateUserWithEmailAndPassword(auth)
+  //   crete user
+  const [createUserWithEmailAndPassword, Cuser, Cloading, Cerror] =
+    useCreateUserWithEmailAndPassword(auth);
 
-//   profile updated
+  //   profile updated
   const [updateProfile, updating, Uerror] = useUpdateProfile(auth);
-// create user
+  // create user
   const onSubmit = async (data) => {
-    await createUserWithEmailAndPassword(data.email,data.password)
-    await updateProfile({displayName:data.name})
-        
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+    reset();
   };
-  
 
-//   google sign in
-  const signInGoogle = ()=>{
-      signInWithGoogle()
+  //   google sign in
+  const signInGoogle = () => {
+    signInWithGoogle();
+  };
+  //   error
+  if (Cerror || Gerror) {
+    setFirebaseError = (
+      <p className="text-red-500 mb-2">{Cerror?.message || Gerror?.message}</p>
+    );
   }
   return (
     <div class="hero min-h-screen bg-base-200">
@@ -122,6 +129,7 @@ const Signup = () => {
                   )}
                 </label>
               </div>
+              {firebaseError}
               <div class="form-control mt-6">
                 <button class="btn btn-md">Signup</button>
               </div>
