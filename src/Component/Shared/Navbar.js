@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
 
 const Navbar = () => {
-    const [user, loading, error] = useAuthState(auth);
-    const handleSignout  = () => {
-        signOut(auth)
-    }
+  const [user, loading, error] = useAuthState(auth);
+  const handleSignout = () => {
+    signOut(auth);
+  };
   return (
-    <div class="navbar bg-base-100 lg:px-12 shadow-lg">
+    <div class="navbar bg-base-100 lg:px-12 shadow-lg fixed top-0 z-50">
       <div class="navbar-start">
         <div class="dropdown">
           <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -37,8 +37,21 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             {
-             <li> {user ? <button onClick={handleSignout}  className="btn btn-ghost">sign Out</button>: <Link to='/login'>Login</Link>} </li>
+              <li>
+                {" "}
+                {user ? (
+                  <button onClick={handleSignout} className="btn btn-ghost">
+                    sign Out
+                  </button>
+                ) : (
+                  <Link to="/login">Login</Link>
+                )}{" "}
+              </li>
             }
+
+            <li>
+              <button className="btn btn-ghost">{user?.displayName}</button>
+            </li>
           </ul>
         </div>
         <a class="btn btn-ghost normal-case text-xl">To Do App</a>
@@ -49,8 +62,20 @@ const Navbar = () => {
             <Link to="/">Home</Link>
           </li>
           {
-             <li>  {user ? <button onClick={handleSignout}  className="btn btn-ghost">sign Out</button>: <Link to='/login'>Login</Link>} </li>
-            }
+            <li>
+              {" "}
+              {user ? (
+                <button onClick={handleSignout} className="btn btn-ghost">
+                  sign Out
+                </button>
+              ) : (
+                <Link to="/login">Login</Link>
+              )}{" "}
+            </li>
+          }
+          <li>
+            <button className="btn btn-ghost">{user?.displayName}</button>
+          </li>
         </ul>
       </div>
     </div>

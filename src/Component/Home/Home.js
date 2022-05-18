@@ -4,7 +4,7 @@ import ToDoList from './ToDoList';
 
 const Home = () => {
     return (
-        <div className='px-12'>
+        <div className='px-12 mt-20'>
            <ToDoList></ToDoList>
            <DisplayTodo></DisplayTodo>
         </div>

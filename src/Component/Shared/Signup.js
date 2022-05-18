@@ -1,9 +1,9 @@
 import React from "react";
 import {
-    useAuthState,
-    useCreateUserWithEmailAndPassword,
-    useSignInWithGoogle,
-    useUpdateProfile
+  useAuthState,
+  useCreateUserWithEmailAndPassword,
+  useSignInWithGoogle,
+  useUpdateProfile
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -58,7 +58,7 @@ const Signup = () => {
     );
   }
   return (
-    <div class="hero min-h-screen bg-base-200">
+    <div class="hero min-h-screen bg-base-200 mt-16">
       <div class="hero-content ">
         <div class="card max-w-sm  lg:w-96 shadow-2xl bg-base-100">
           <div class="card-body">
@@ -74,6 +74,7 @@ const Signup = () => {
                       message: "name required",
                     },
                   })}
+                  placeholder='your name'
                   className="input input-bordered w-full max-w-xs"
                 />
                 <label className="label">
@@ -99,6 +100,7 @@ const Signup = () => {
                       message: "provided valid email",
                     },
                   })}
+                  placeholder="email"
                   className="input input-bordered w-full max-w-xs"
                 />
                 <label className="label">
@@ -129,6 +131,7 @@ const Signup = () => {
                       message: "password must be 6 character",
                     },
                   })}
+                  placeholder="password"
                   className="input input-bordered w-full max-w-xs"
                 />
                 <label className="label">

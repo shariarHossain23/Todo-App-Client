@@ -64,7 +64,7 @@ const Login = () => {
     }
   };
   return (
-    <div class="hero min-h-screen bg-base-200">
+    <div class="hero min-h-screen bg-base-200 mt-16">
       <div class="hero-content ">
         <div class="card max-w-sm  lg:w-96 shadow-2xl bg-base-100">
           <div class="card-body">
@@ -84,6 +84,7 @@ const Login = () => {
                       message: "provided valid email",
                     },
                   })}
+                  placeholder="email"
                   onChange={(e) => setEmail(e.target.value)}
                   className="input input-bordered w-full max-w-xs"
                 />
@@ -115,6 +116,7 @@ const Login = () => {
                       message: "password must be 6 character",
                     },
                   })}
+                  placeholder="password"
                   className="input input-bordered w-full max-w-xs"
                 />
                 <label className="label">
