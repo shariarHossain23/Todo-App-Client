@@ -1,21 +1,67 @@
-import React from 'react';
+import React from "react";
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import auth from "../../firebase.init";
 
 const Signup = () => {
-    const {
-        register,
-        handleSubmit,
-        watch,
-        formState: { errors },
-      } = useForm();
-      const onSubmit = data => console.log(data);
-    return (
-        <div class="hero min-h-screen bg-base-200">
-        <div class="hero-content ">
-          <div class="card max-w-sm  lg:w-96 shadow-2xl bg-base-100">
-            <div class="card-body">
-              <form onSubmit={handleSubmit(onSubmit)}>
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+//   google sign
+  const [signInWithGoogle, Guser, Gloading, Gerror] = useSignInWithGoogle(auth);
+//   crete user
+  const [
+    createUserWithEmailAndPassword,
+    user,
+    loading,
+    error,
+  ] = useCreateUserWithEmailAndPassword(auth)
+
+//   profile updated
+  const [updateProfile, updating, Uerror] = useUpdateProfile(auth);
+// create user
+  const onSubmit = async (data) => {
+    await createUserWithEmailAndPassword(data.email,data.password)
+    await updateProfile({displayName:data.name})
+        
+  };
+  
+
+//   google sign in
+  const signInGoogle = ()=>{
+      signInWithGoogle()
+  }
+  return (
+    <div class="hero min-h-screen bg-base-200">
+      <div class="hero-content ">
+        <div class="card max-w-sm  lg:w-96 shadow-2xl bg-base-100">
+          <div class="card-body">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div class="form-control">
+                <label class="label">
+                  <span class="label-text">Name</span>
+                </label>
+                <input
+                  {...register("name", {
+                    required: {
+                      value: true,
+                      message: "name required",
+                    },
+                  })}
+                  className="input input-bordered w-full max-w-xs"
+                />
+                <label className="label">
+                  {errors.name?.type === "required" && (
+                    <span className="label-text-alt text-red-500">
+                      {errors.name.message}
+                    </span>
+                  )}
+                </label>
+              </div>
               <div class="form-control">
                 <label class="label">
                   <span class="label-text">Email</span>
@@ -33,7 +79,7 @@ const Signup = () => {
                   })}
                   className="input input-bordered w-full max-w-xs"
                 />
-                 <label className="label">
+                <label className="label">
                   {errors.email?.type === "required" && (
                     <span className="label-text-alt text-red-500">
                       {errors.email.message}
@@ -63,7 +109,7 @@ const Signup = () => {
                   })}
                   className="input input-bordered w-full max-w-xs"
                 />
-                 <label className="label">
+                <label className="label">
                   {errors.password?.type === "required" && (
                     <span className="label-text-alt text-red-500">
                       {errors.password.message}
@@ -75,22 +121,26 @@ const Signup = () => {
                     </span>
                   )}
                 </label>
-                
               </div>
               <div class="form-control mt-6">
-                <button class="btn btn-md">Login</button>
+                <button class="btn btn-md">Signup</button>
               </div>
-              </form>
-              <p>You Have alredy account? <Link to='/login'>Login</Link></p>
-              <div class="divider">OR</div>
-              <button className="btn btn-md rounded-full">
-                Continue with google
-              </button>
-            </div>
+            </form>
+            <p>
+              You Have alredy account?{" "}
+              <Link className="text-orange-500" to="/login">
+                Login
+              </Link>
+            </p>
+            <div class="divider">OR</div>
+            <button onClick={signInGoogle} className="btn btn-md rounded-full">
+              Continue with google
+            </button>
           </div>
         </div>
       </div>
-    );
+    </div>
+  );
 };
 
 export default Signup;

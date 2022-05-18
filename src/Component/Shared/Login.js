@@ -85,7 +85,7 @@ const Login = () => {
               <button class="btn btn-md">Login</button>
             </div>
             </form>
-            <p>You are new? <Link to='/signup'>Signup</Link></p>
+            <p>You are new? <Link className="text-orange-500" to='/signup'>Signup</Link></p>
             <div class="divider">OR</div>
             <button className="btn btn-md rounded-full">
               Continue with google
