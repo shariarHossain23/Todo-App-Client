@@ -1,7 +1,14 @@
+import { signOut } from "firebase/auth";
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import auth from "../../firebase.init";
 
 const Navbar = () => {
+    const [user, loading, error] = useAuthState(auth);
+    const handleSignout  = () => {
+        signOut(auth)
+    }
   return (
     <div class="navbar bg-base-100 lg:px-12 shadow-lg">
       <div class="navbar-start">
@@ -26,12 +33,12 @@ const Navbar = () => {
             tabindex="0"
             class="menu menu-compact flex justify-center items-center dropdown-content mt-3 p-2 shadow bg-base-100  w-[96vw]"
           >
-             <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
-            <Link to='/login'>Login</Link>
-          </li>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            {
+             <li> {user ? <button onClick={handleSignout}  className="btn btn-ghost">sign Out</button>: <Link to='/login'>Login</Link>} </li>
+            }
           </ul>
         </div>
         <a class="btn btn-ghost normal-case text-xl">protfolio</a>
@@ -39,11 +46,11 @@ const Navbar = () => {
       <div class="navbar-end hidden lg:flex">
         <ul class="menu menu-horizontal p-0">
           <li>
-            <Link to='/'>Home</Link>
+            <Link to="/">Home</Link>
           </li>
-          <li>
-            <Link to='/login'>Login</Link>
-          </li>
+          {
+             <li>  {user ? <button onClick={handleSignout}  className="btn btn-ghost">sign Out</button>: <Link to='/login'>Login</Link>} </li>
+            }
         </ul>
       </div>
     </div>

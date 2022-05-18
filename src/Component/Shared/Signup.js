@@ -1,14 +1,17 @@
 import React from "react";
 import {
+    useAuthState,
     useCreateUserWithEmailAndPassword,
     useSignInWithGoogle,
     useUpdateProfile
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
+import Spinner from "./Spinner";
 
 const Signup = () => {
+    const [user,loading,error] = useAuthState(auth)
   const {
     register,
     handleSubmit,
@@ -35,6 +38,17 @@ const Signup = () => {
   const signInGoogle = () => {
     signInWithGoogle();
   };
+
+  let navigate = useNavigate();
+  let location = useLocation();
+
+  let from = location.state?.from?.pathname || "/";
+  if(user){
+    navigate(from, { replace: true });
+  }
+  if(Gloading || Cloading){
+    return <Spinner></Spinner>
+}
   // show firebase error
   let signError;
 

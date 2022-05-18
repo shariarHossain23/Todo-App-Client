@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import {
+    useAuthState,
     useSendPasswordResetEmail,
     useSignInWithEmailAndPassword,
     useSignInWithGoogle
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
+import Spinner from "./Spinner";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -18,12 +20,12 @@ const Login = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const [user,loading,error]= useAuthState(auth)
   const [signInWithGoogle, Guser, Gloading, Gerror] = useSignInWithGoogle(auth);
   const [signInWithEmailAndPassword, Cuser, Cloading, Cerror] =
     useSignInWithEmailAndPassword(auth);
-    const [sendPasswordResetEmail, sending, Ferror] = useSendPasswordResetEmail(
-        auth
-      );
+  const [sendPasswordResetEmail, sending, Ferror] =
+    useSendPasswordResetEmail(auth);
   //   signin email and pass
   const onSubmit = (data) => {
     signInWithEmailAndPassword(data.email, data.password);
@@ -34,6 +36,13 @@ const Login = () => {
   const signInGoogle = () => {
     signInWithGoogle();
   };
+  let navigate = useNavigate();
+  let location = useLocation();
+
+  let from = location.state?.from?.pathname || "/";
+  if(user){
+    navigate(from, { replace: true });
+  }
 
   let signError;
 
@@ -42,18 +51,18 @@ const Login = () => {
       <p className="text-red-500 mb-2">{Cerror?.message || Gerror?.message}</p>
     );
   }
-
+ if(Gloading || Cloading){
+     return <Spinner></Spinner>
+ }
   // forgotten password
-const forgottenPassword = ()=>{
-    if(email){
-        sendPasswordResetEmail(email)
-        toast.success("email send")
+  const forgottenPassword = () => {
+    if (email) {
+      sendPasswordResetEmail(email);
+      toast.success("email send");
+    } else {
+      toast.error("provide your email");
     }
-    else{
-        toast.error("provide your email")
-    }
-}
-console.log(sending);
+  };
   return (
     <div class="hero min-h-screen bg-base-200">
       <div class="hero-content ">
@@ -121,7 +130,11 @@ console.log(sending);
                   )}
                 </label>
                 <label class="label">
-                  <a onClick={forgottenPassword} href="#" class="label-text-alt link link-hover">
+                  <a
+                    onClick={forgottenPassword}
+                    href="#"
+                    class="label-text-alt link link-hover"
+                  >
                     Forgot password?
                   </a>
                 </label>
