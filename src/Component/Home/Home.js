@@ -1,11 +1,10 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import ToDoList from './ToDoList';
 
 const Home = () => {
     return (
-        <div>
-            this is home
-            <Outlet></Outlet>
+        <div className='px-12'>
+           <ToDoList></ToDoList>
         </div>
     );
 };

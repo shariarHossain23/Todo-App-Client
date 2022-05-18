@@ -41,7 +41,7 @@ const Navbar = () => {
             }
           </ul>
         </div>
-        <a class="btn btn-ghost normal-case text-xl">protfolio</a>
+        <a class="btn btn-ghost normal-case text-xl">To Do App</a>
       </div>
       <div class="navbar-end hidden lg:flex">
         <ul class="menu menu-horizontal p-0">

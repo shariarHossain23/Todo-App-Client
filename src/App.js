@@ -10,7 +10,7 @@ import Signup from './Component/Shared/Signup';
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <ToastContainer/>
       <Navbar></Navbar>
      <Routes>
