@@ -18,7 +18,7 @@ const ToDoList = () => {
          name: event.target.name.value,
          desc : event.target.description.value
       }
-        axios.post("http://localhost:5000/todo",todoCollection)
+        axios.post("https://calm-spire-98627.herokuapp.com/todo",todoCollection)
         .then(response => {
             toast.success("updated successfully")
             event.target.reset()

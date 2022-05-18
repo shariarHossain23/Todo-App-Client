@@ -6,7 +6,7 @@ const Modal = ({task,selectTask,refetch}) => {
     const id = task?._id;
 
     const handleDelete = () => {
-        axios.delete(`http://localhost:5000/todo/${id}`)
+        axios.delete(`https://calm-spire-98627.herokuapp.com/todo/${id}`)
         .then(response => {
             if(response.data.deletedCount > 0){
                 toast.success("successfully deleted")
