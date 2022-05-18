@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
     useCreateUserWithEmailAndPassword,
     useSignInWithGoogle,
@@ -9,7 +9,6 @@ import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
 
 const Signup = () => {
-  const [firebaseError, setFirebaseError] = useState("");
   const {
     register,
     handleSubmit,
@@ -36,9 +35,11 @@ const Signup = () => {
   const signInGoogle = () => {
     signInWithGoogle();
   };
-  //   error
+  // show firebase error
+  let signError;
+
   if (Cerror || Gerror) {
-    setFirebaseError = (
+    signError = (
       <p className="text-red-500 mb-2">{Cerror?.message || Gerror?.message}</p>
     );
   }
@@ -129,7 +130,7 @@ const Signup = () => {
                   )}
                 </label>
               </div>
-              {firebaseError}
+              {signError}
               <div class="form-control mt-6">
                 <button class="btn btn-md">Signup</button>
               </div>

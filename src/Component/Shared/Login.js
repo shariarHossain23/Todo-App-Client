@@ -1,23 +1,48 @@
-import React from "react";
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import React, { useState } from "react";
+import { useSignInWithEmailAndPassword, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
 
 const Login = () => {
+    const [email,setEmail] = useState("")
   const {
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors },
   } = useForm();
   const [signInWithGoogle, Guser, Gloading, Gerror] = useSignInWithGoogle(auth);
-  const onSubmit = data => console.log(data);
+  const [
+    signInWithEmailAndPassword,
+    Cuser,
+    Cloading,
+    Cerror,
+  ] = useSignInWithEmailAndPassword(auth);
 
+  console.log(watch);
+//   signin email and pass 
+const onSubmit =  data => {
+    signInWithEmailAndPassword(data.email, data.password);
+    reset()
+};
+console.log(Cuser);
 //   google sign in
 const signInGoogle = ()=>{
     signInWithGoogle()
 }
+
+let signError;
+
+if (Cerror || Gerror) {
+  signError = (
+    <p className="text-red-500 mb-2">{Cerror?.message || Gerror?.message}</p>
+  );
+}
+
+// 
+
   return (
     <div class="hero min-h-screen bg-base-200">
       <div class="hero-content ">
@@ -39,6 +64,7 @@ const signInGoogle = ()=>{
                     message: "provided valid email",
                   },
                 })}
+                onChange={(e)=>setEmail(e.target.value) }
                 className="input input-bordered w-full max-w-xs"
               />
                <label className="label">
@@ -89,13 +115,14 @@ const signInGoogle = ()=>{
                 </a>
               </label>
             </div>
+            {signError}
             <div class="form-control mt-6">
               <button class="btn btn-md">Login</button>
             </div>
             </form>
             <p>You are new? <Link className="text-orange-500" to='/signup'>Signup</Link></p>
             <div class="divider">OR</div>
-            <button className="btn btn-md rounded-full">
+            <button onClick={signInGoogle} className="btn btn-md rounded-full">
               Continue with google
             </button>
           </div>
