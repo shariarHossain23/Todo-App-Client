@@ -24,14 +24,14 @@ const Navbar = () => {
           </label>
           <ul
             tabindex="0"
-            class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            class="menu menu-compact flex justify-center items-center dropdown-content mt-3 p-2 shadow bg-base-100  w-[96vw]"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+             <li>
+            <Link to='/'>Home</Link>
+          </li>
+          <li>
+            <Link to='/login'>Login</Link>
+          </li>
           </ul>
         </div>
         <a class="btn btn-ghost normal-case text-xl">To Do App</a>
