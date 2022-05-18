@@ -3,6 +3,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import Home from './Component/Home/Home';
+import Fotter from './Component/Shared/Fotter';
 import Login from './Component/Shared/Login';
 import Navbar from './Component/Shared/Navbar';
 import RequireAuth from './Component/Shared/RequireAuth';
@@ -20,6 +21,7 @@ function App() {
        <Route path='/login'element={<Login></Login>}></Route>
        <Route path='/signup'element={<Signup></Signup>}></Route>
      </Routes>
+     <Fotter></Fotter>
     </div>
   );
 }

@@ -11,18 +11,20 @@ const ToDoList = () => {
     reset,
     formState: { errors },
   } = useForm();
+
   const submitData = event =>{
       event.preventDefault()
       const todoCollection = {
          name: event.target.name.value,
          desc : event.target.description.value
       }
- 
-      axios.post("http://localhost:5000/todo",todoCollection)
-      .then(response => {
-          toast.success("updated successfully")
-          event.target.reset()
-      })
+        axios.post("http://localhost:5000/todo",todoCollection)
+        .then(response => {
+            toast.success("updated successfully")
+            event.target.reset()
+            
+        })
+    
   }
   return (
     <div className="mt-16 ">
@@ -36,7 +38,7 @@ const ToDoList = () => {
           name="name"
         />
         <br />
-        <textarea class="textarea textarea-bordered w-full my-6" placeholder="Description" name="description"></textarea> <br />
+        <textarea class="textarea textarea-bordered w-full my-6" placeholder="Description" name="description" required></textarea> <br />
        <button class="btn btn-primary max-w-md">Add</button>
       </form>
     </div>
