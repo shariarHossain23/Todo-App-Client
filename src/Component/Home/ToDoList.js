@@ -4,6 +4,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import auth from "../../firebase.init";
+import Fotter from "../Shared/Fotter";
+import Navbar from "../Shared/Navbar";
 
 const ToDoList = () => {
   const {
@@ -51,6 +53,8 @@ const ToDoList = () => {
   
 
   return (
+    <div>
+      <Navbar></Navbar>
     <div className="mt-24 ">
         <h1 className="text-center text-4xl ">Add To Do</h1>
       <form onKeyPress={handleKeyPress} onSubmit={submitData} className=" text-center shadow-lg p-16 rounded">
@@ -66,6 +70,8 @@ const ToDoList = () => {
         <textarea onChange={(e) => setDesc(e.target.value)}  class="textarea textarea-bordered w-full my-6" placeholder="Add Task" name="description" required></textarea> <br />
        <button class="btn btn-primary max-w-md">Add</button>
       </form>
+    </div>
+    <Fotter></Fotter>
     </div>
   );
 };

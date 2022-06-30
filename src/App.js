@@ -6,9 +6,7 @@ import Calander from './Component/Home/Calander';
 import Complete from './Component/Home/Complete';
 import Home from './Component/Home/Home';
 import ToDoList from './Component/Home/ToDoList';
-import Fotter from './Component/Shared/Fotter';
 import Login from './Component/Shared/Login';
-import Navbar from './Component/Shared/Navbar';
 import RequireAuth from './Component/Shared/RequireAuth';
 import Signup from './Component/Shared/Signup';
 
@@ -16,7 +14,7 @@ function App() {
   return (
     <div>
       <ToastContainer/>
-      <Navbar></Navbar>
+      
      <Routes>
        <Route path='/'element={<RequireAuth>
         <Home></Home>
@@ -33,7 +31,6 @@ function App() {
        <Route path='/login'element={<Login></Login>}></Route>
        <Route path='/signup'element={<Signup></Signup>}></Route>
      </Routes>
-     <Fotter></Fotter>
     </div>
   );
 }

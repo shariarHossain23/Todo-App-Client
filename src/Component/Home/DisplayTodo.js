@@ -32,6 +32,8 @@ const DisplayTodo = () => {
 
 
   return (
+    <div>
+   
     <div class="overflow-x-auto mt-16">
       <h1 className="text-4xl mb-16 text-center">To Do List</h1>
       <table class="table w-full">
@@ -52,6 +54,8 @@ const DisplayTodo = () => {
       </table>
       <Modal task={task} selectTask={selectTask} refetch={refetch}></Modal>
       <EditModal edit={edit} setEdit={setEdit} refetch={refetch}></EditModal>
+    </div>
+
     </div>
   );
 };
