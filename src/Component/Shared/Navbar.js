@@ -41,6 +41,9 @@ const Navbar = () => {
             <li>
             <Link to="/complete">Complete</Link>
           </li>
+            <li>
+            <Link to="/calendar">Calendar</Link>
+          </li>
             {
               <li>
                 {" "}
@@ -71,6 +74,9 @@ const Navbar = () => {
           </li>
           <li>
             <Link to="/complete">Complete</Link>
+          </li>
+          <li>
+            <Link to="/calendar">Calendar</Link>
           </li>
           {
             <li>

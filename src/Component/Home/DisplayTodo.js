@@ -18,7 +18,7 @@ const DisplayTodo = () => {
 
   const { data, isLoading, refetch } = useQuery("todo", () =>
     axios
-      .get(`http://localhost:5000/todo/${user?.email}`)
+      .get(`https://calm-spire-98627.herokuapp.com/todo/${user?.email}`)
       .then((response) => {
         setTodos(response.data);
       })

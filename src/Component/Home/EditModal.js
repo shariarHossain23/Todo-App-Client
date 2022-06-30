@@ -6,16 +6,13 @@ const EditModal = ({ edit, setEdit, refetch }) => {
     const [name,setName] = useState("")
     const [desc,setDesc] = useState("")
 
-    console.log(name,desc);
-
-    console.log();
 
     const handleUpdateDelete = () => {
         const updateData = {
             name:name,
             desc:desc
         }
-        axios.patch(`http://localhost:5000/todo/${edit?._id}`,updateData)
+        axios.patch(`https://calm-spire-98627.herokuapp.com/todo/${edit?._id}`,updateData)
         .then(res => {
             setName("")
             setDesc("")

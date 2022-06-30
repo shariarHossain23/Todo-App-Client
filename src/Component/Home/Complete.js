@@ -10,7 +10,7 @@ const Complete = () => {
     const newElement = completed.filter(c => c.updated)
     // console.log(newElement);
     useEffect(()=>{
-        axios.get(`http://localhost:5000/todocompleted/${user?.email}`)
+        axios.get(`https://calm-spire-98627.herokuapp.com/todocompleted/${user?.email}`)
         .then(res => {
             setComplete(res.data)
         })

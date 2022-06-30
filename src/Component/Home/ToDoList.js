@@ -39,7 +39,7 @@ const ToDoList = () => {
         desc : desc,
         email: user?.email
      }
-       axios.post("http://localhost:5000/todo",todoCollection)
+       axios.post("https://calm-spire-98627.herokuapp.com/todo",todoCollection)
        .then(response => {
            toast.success("updated successfully")
           

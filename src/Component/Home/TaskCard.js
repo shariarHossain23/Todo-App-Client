@@ -13,7 +13,7 @@ const TaskCard = ({ todo, selectTask,setEdit }) => {
 
   const handleComplete = (e) => {
     if(e.target.checked){
-      axios.put(`http://localhost:5000/todo/${todo?._id}`)
+      axios.put(`https://calm-spire-98627.herokuapp.com/todo/${todo?._id}`)
       .then(res => {
         setDisabled(res.data.message)
         toast.success("Task Completed")

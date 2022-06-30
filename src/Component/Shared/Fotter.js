@@ -1,8 +1,7 @@
-import React from "react";
 
 const Fotter = () => {
   return (
-    <footer class="mt-20 footer items-center p-4 bg-gray-500 px-12 py-16 text-neutral-content">
+    <footer class="mt-52 footer items-center p-4 bg-gray-500 px-12 py-16 text-neutral-content">
       <div class="items-center grid-flow-col">
         <p>Copyright © 2022 - All right reserved</p>
       </div>
