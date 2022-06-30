@@ -1,5 +1,4 @@
 import { signOut } from "firebase/auth";
-import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import auth from "../../firebase.init";
@@ -36,6 +35,9 @@ const Navbar = () => {
             <li>
               <Link to="/">Home</Link>
             </li>
+            <li>
+              <Link to="/add-todo">To Do</Link>
+            </li>
             {
               <li>
                 {" "}
@@ -60,6 +62,9 @@ const Navbar = () => {
         <ul class="menu menu-horizontal p-0">
           <li>
             <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/add-todo">To Do</Link>
           </li>
           {
             <li>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 
 const TaskCard = ({ todo, selectTask }) => {
@@ -19,6 +19,12 @@ const TaskCard = ({ todo, selectTask }) => {
         >
           Complete
         </button>
+      </td>
+      <td>
+      <label
+        >
+          Edit
+        </label>
       </td>
       <td>
         <label
