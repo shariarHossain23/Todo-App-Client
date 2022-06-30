@@ -1,17 +1,23 @@
 import axios from "axios";
 import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from 'react-router-dom';
 import { toast } from "react-toastify";
+import auth from "../../firebase.init";
 
 const TaskCard = ({ todo, selectTask,setEdit }) => {
   const [disable,setDisabled] = useState(false)
-  const [reload,setReload] = useState(false)
   const { name, desc } = todo;
+  const navigate = useNavigate()
+  const [user] = useAuthState(auth)
+
   const handleComplete = (e) => {
     if(e.target.checked){
       axios.put(`http://localhost:5000/todo/${todo?._id}`)
       .then(res => {
         setDisabled(res.data.message)
         toast.success("Task Completed")
+        navigate('/complete')
       })
     }
   };
@@ -19,7 +25,7 @@ const TaskCard = ({ todo, selectTask,setEdit }) => {
   
   return (
     <tr>
-      <td><input onClick={handleComplete} disabled={disable}  type="checkbox" /></td>
+      <td><input onClick={handleComplete} type="checkbox" /></td>
       <td> <p>{name}</p></td>
       <td> <p>{desc}</p></td>
       <td>

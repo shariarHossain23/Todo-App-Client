@@ -13,6 +13,9 @@ const DisplayTodo = () => {
   const [edit,setEdit] = useState(null)
   const [user] = useAuthState(auth)
   const [todos, setTodos] = useState([]);
+
+  
+
   const { data, isLoading, refetch } = useQuery("todo", () =>
     axios
       .get(`http://localhost:5000/todo/${user?.email}`)
@@ -24,6 +27,9 @@ const DisplayTodo = () => {
   if (isLoading) {
     return <Spinner></Spinner>;
   }
+
+ 
+
 
   return (
     <div class="overflow-x-auto mt-16">
