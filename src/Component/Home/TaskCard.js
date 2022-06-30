@@ -1,30 +1,29 @@
+import axios from "axios";
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-const TaskCard = ({ todo, selectTask }) => {
-  const [complete, setComplete] = useState(false);
+const TaskCard = ({ todo, selectTask,setEdit }) => {
+  const [disable,setDisabled] = useState(false)
+  const [reload,setReload] = useState(false)
   const { name, desc } = todo;
-  const handleComplete = () => {
-    setComplete(true);
-    toast.success("completed");
+  const handleComplete = (e) => {
+    if(e.target.checked){
+      axios.put(`http://localhost:5000/todo/${todo?._id}`)
+      .then(res => {
+        setDisabled(res.data.message)
+        toast.success("Task Completed")
+      })
+    }
   };
+
+  
   return (
     <tr>
-      <td>{complete ? <del>{name}</del> : <p>{name}</p>}</td>
-      <td>{complete ? <del>{desc}</del> : <p>{desc}</p>}</td>
+      <td><input onClick={handleComplete} disabled={disable}  type="checkbox" /></td>
+      <td> <p>{name}</p></td>
+      <td> <p>{desc}</p></td>
       <td>
-        <button
-          onClick={() => handleComplete(todo._id)}
-          className="btn btn-xs btn-success text-white"
-        >
-          Complete
-        </button>
-      </td>
-      <td>
-      <label
-        >
-          Edit
-        </label>
+      <label onClick={()=> setEdit(todo)} for="edit-modal" class="btn btn-info btn-xs text-white">Edit</label>
       </td>
       <td>
         <label

@@ -1,7 +1,9 @@
 import axios from "axios";
 import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
+import auth from "../../firebase.init";
 
 const ToDoList = () => {
   const {
@@ -11,13 +13,15 @@ const ToDoList = () => {
     reset,
     formState: { errors },
   } = useForm();
+  const [user] = useAuthState(auth)
   const [name,setName] = useState("")
   const [desc,setDesc] = useState("")
   const submitData = event =>{
       event.preventDefault()
       const todoCollection = {
          name: event.target.name.value,
-         desc : event.target.description.value
+         desc : event.target.description.value,
+         email: user?.email
       }
         axios.post("https://calm-spire-98627.herokuapp.com/todo",todoCollection)
         .then(response => {
@@ -32,9 +36,10 @@ const ToDoList = () => {
     if(event.key === 'Enter'){
       const todoCollection = {
         name: name,
-        desc : desc
+        desc : desc,
+        email: user?.email
      }
-       axios.post("https://calm-spire-98627.herokuapp.com/todo",todoCollection)
+       axios.post("http://localhost:5000/todo",todoCollection)
        .then(response => {
            toast.success("updated successfully")
           
@@ -45,9 +50,6 @@ const ToDoList = () => {
   }
   
 
-  // const handleKeyPress = (e) => {
-  //   console.log(e);
-  // }}
   return (
     <div className="mt-24 ">
         <h1 className="text-center text-4xl ">Add To Do</h1>

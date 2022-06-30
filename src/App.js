@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import Complete from './Component/Home/Complete';
 import Home from './Component/Home/Home';
 import ToDoList from './Component/Home/ToDoList';
 import Fotter from './Component/Shared/Fotter';
@@ -21,6 +22,9 @@ function App() {
        </RequireAuth>}></Route>
        <Route path='/add-todo' element={<RequireAuth>
         <ToDoList></ToDoList>
+       </RequireAuth>}></Route>
+       <Route path='/complete' element={<RequireAuth>
+        <Complete></Complete>
        </RequireAuth>}></Route>
        <Route path='/login'element={<Login></Login>}></Route>
        <Route path='/signup'element={<Signup></Signup>}></Route>
